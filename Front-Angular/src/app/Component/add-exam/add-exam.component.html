@@ -1,0 +1,38 @@
+
+
+<div id="booking" class="section">
+  <div class="section-center">
+    <div class="container">
+      <div class="row">
+        <div class="booking-form">
+
+  <form [formGroup]="ExamAddForm"  class="p-5  mx-5" >
+
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <div class="mb-3 ">
+                    <h2 for="ExamNameinput" class="form-label">Exam Name</h2>
+                    <input formControlName="ExamName" type="text" class="form-control" id="ExamNameinput" >
+                    <ng-container *ngIf="getExamName.touched">
+                      <div id="ExamNameinput" class="text-danger" *ngIf="getExamName.hasError('required')"> Please Enter Exam </div>
+                      <div id="ExamNameinput" class="text-danger" *ngIf="getExamName.hasError('minlength')"> Exam must be 3 chars at least</div>
+                    </ng-container>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-btn">
+                  <button class="btn submit-btn"  (click)="Submit($event)">   {{ ExamId == 0 ? "Add Questions" : "Save Changes"}} </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

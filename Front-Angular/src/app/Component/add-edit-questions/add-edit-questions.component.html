@@ -1,0 +1,60 @@
+<div class="w-100 bgImg">
+<div class="container mx-auto p-5" style="margin-top: 50px;">
+
+  <form [formGroup]="QuestionsForm" class="p-5  mx-5">
+    <div class="mb-3 ">
+      <h2 for="question" class="form-label">Question</h2>
+      <input formControlName="qname" type="text" class="form-control" id="question">
+      <ng-container *ngIf="getQuestionName.touched">
+        <div id="question" class="text-danger" *ngIf="getQuestionName.hasError('required')"> Please Enter Question
+        </div>
+        <div id="question" class="text-danger" *ngIf="getQuestionName.hasError('minlength')"> Question must be 10 chars
+          at least</div>
+      </ng-container>
+    </div>
+
+    <div class="mb-3 col-8" *ngFor="let c of filteredChoices;let i = index">
+      <ng-container >
+        <label for="allChoices" class="form-label"> Choice {{i+1}} </label>
+        <input type="text" class="form-control" id="allChoices" [value]="c.text" (blur)="Edit($event.target, i)">
+        <ng-container>
+          <div id="choice" class="text-danger" *ngIf="filteredChoices[i].text == ''"> Please Enter a choice </div>
+        </ng-container>
+        <button class="btn btn-danger mt-2" (click)="Delete(i)">Delete Choice</button>
+      </ng-container>
+    </div>
+
+    <div class="mb-3 col-8">
+      <label for="choice" class="form-label">Add Choice</label>
+      <input formControlName="addChoiceInput" type="text" class="form-control" id="choice">
+      <ng-container *ngIf="getaddChoiceInput.touched">
+        <div id="choice" class="text-danger" *ngIf="choices.length<2"> Please Enter at least 2 choices </div>
+        <div id="choice" class="text-danger" *ngIf="getaddChoiceInput.hasError('minlength')"> Question must be 3 chars
+          at least</div>
+      </ng-container>
+      <button class="btn btn-success mt-2" (click)="AddChoice()"
+        [disabled]="!QuestionsForm.controls.addChoiceInput.valid || QuestionsForm.controls.addChoiceInput.value === ''">Add
+        Choice</button>
+    </div>
+
+    <div class="mb-3 col-8">
+      <label for="CorrectAns" class="form-label">Correct Choice</label>
+
+      <select name="CorrectAns" class="form-control" id="CorrectAns" formControlName="correctAnswer">
+        <option *ngFor="let c of filteredChoices let i=index" value="{{c.text}}"
+          [selected]="c.text == question.correctAnswer">{{c.text}}</option>
+      </select>
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary" (click)="Submit($event)"
+      [disabled]="filteredChoices.length < 2 || QuestionsForm.controls.correctAnswer==null||!QuestionsForm.controls.correctAnswer.valid ">
+      {{ questionId == 0 ? "Add Question" : "Save Changes"}}</button>
+
+  </form>
+</div>
+</div>
+
+

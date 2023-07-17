@@ -1,0 +1,56 @@
+
+
+<div [ngClass]="{ 'hidden': showResult}" class="bg_cart w-100 vh-100 position-absolute">
+  <div class="container vh-100">
+      <div class="row" style="margin-top: 150px;">
+          <div [ngClass]="{ 'slide-down': showResult,'visible': showResult} " class="modalbox success col-sm-8 col-md-6 col-lg-4 center animate">
+            <ng-container  *ngIf="result">
+              <div  class="icon bg-success">
+                  <svg xmlns="http://www.w3.org/2000/svg" style="color: #F5F5F5;" width="80" height="80" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                      <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                    </svg>
+                    </div>
+                    <h1>Success!</h1>
+                  </ng-container>
+              <ng-container *ngIf="!result">
+              <!--/.icon-->
+              <div  class="icon bg-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" style="color: #F5F5F5;" width="80" height="80"  fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                </svg>
+          </div>
+              <h1>Fail!</h1>
+            </ng-container>
+              <p> {{totalDegree}} / {{Questions.length}}</p>
+              <button [ngClass]="{ 'btn_color': !result}"  type="button" class="redo btn" (click)="toggleSuccessMessage()" >Ok</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="container" id="exam_data" [ngClass]="{'top0': showResult}"  style="margin: 100px;">
+  <div  *ngIf="currentQuestion"  >
+    <div class="d-flex justify-content-between">
+  <fieldset class="col-lg-9 col-sm-12 m-auto p-3 ">
+    <legend class="p-3">{{ currentQuestion.text }} </legend>
+        <ul>
+          <li *ngFor="let choice of currentQuestion.choices">
+            <div class="p-3 mydiv">
+              <input type="radio" id="vanilla" name="{{ currentQuestion.id }}" value="{{choice.text}}" [(ngModel)]="currentQuestion.selectedValue" >
+              <label for="vanilla">{{ choice.text }}</label>
+            </div>
+          </li>
+        </ul>
+  </fieldset>
+  <div style="margin-top: 100px;"><img src="assets/images/q2.png" class="img-fluid" alt=""></div>
+  </div>
+  <div class="row d-flex justify-content-between">
+  <div class="m-3 d-flex justify-content-between col-lg-9">
+    <button class=" btn btn-danger rounded scrollto " (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0">&lt;&lt; Previous</button>
+    <button class="btn gbtn btn-success rounded position-relative "(click)="nextQuestion()" [disabled]="currentQuestionIndex === Questions.length - 1">Next &gt;&gt;</button>
+    <button class="btn btn btn-success rounded position-relative "(click)="calculateDegree()" [hidden]="currentQuestionIndex !== Questions.length - 1">Calculate Degree 🍓</button>
+  </div>
+
+  </div>
+  </div>
+  </div>

@@ -1,0 +1,62 @@
+
+ <!-- ======= Header ======= -->
+ <header id="header" class="fixed-top ">
+
+
+
+        <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+
+        <nav class="navbar navbar-expand-lg bg-lightdark p-3">
+          <div class="container-fluid">
+            <h1 class="logo me-auto me-lg-0"><a href="index.html">EDU Udacity</a></h1>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+              <ul class="navbar-nav mx-auto my-auto">
+                <li class="nav-item">
+                  <a class="nav-link text-light active" aria-current="page" [routerLink]="['/']">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light"  [routerLink]="['/aboutus']">About</a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link text-light" [routerLink]="['/contactus']">Contact Us</a>
+                </li>
+                <ng-container *ngIf="isAdmin()">
+                <li class="nav-item ">
+                  <a class="nav-link text-light" [routerLink]="['/Dashboard']">Dashboard</a>
+                </li>
+              </ng-container>
+                <ng-container *ngIf="!isAdmin() && isLoggedIn()">
+                  <li class="nav-item dropdown ">
+                    <a class="nav-link text-light"  [routerLink]="['/takeExam']">
+                       Take Exam
+                    </a>
+                  </li>
+                  <li class="nav-item ">
+                    <a class="nav-link text-light" [routerLink]="['/grade']">Grade</a>
+                  </li>
+                  </ng-container>
+              </ul>
+              <ul class="navbar-nav">
+                <ng-container *ngIf="isLoggedIn() && isLoggedIn()">
+                  <li><span class="nav-link text-light fw-bold">{{Username}}</span></li>
+                  <li><a  class="get-started-btn scrollto" (click)="logout()">LogOut</a></li>
+                </ng-container>
+                <ng-container *ngIf="!isLoggedIn()">
+                <li><a  [routerLink]="['/register']" class="get-started-btn scrollto">Register</a></li>
+                <li><a [routerLink]="['/login']" class="get-started-btn scrollto">Login</a></li>
+                </ng-container>
+               </ul>
+            </div>
+          </div>
+
+        </nav>
+
+
+
+</header><!-- End Header -->
+

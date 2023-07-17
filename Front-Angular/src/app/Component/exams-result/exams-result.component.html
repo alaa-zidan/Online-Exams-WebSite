@@ -1,0 +1,26 @@
+<div style="  padding-bottom: 80px; padding-top: 20px;">
+  <div class="my-5 pt-5 " >
+    <div class="container " >
+        <table class="table table-hover table-light mb-0">
+            <thead>
+                <tr>
+                    <td class="bg-success text-light fw-bold">No.</td>
+                    <td class="bg-success text-light fw-bold">Exam Name</td>
+                    <td class="bg-success text-light fw-bold">Grade</td>
+                    <td class="bg-success text-light fw-bold">Full Mark</td>
+                </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let e of ExamAttemp; let i =index">
+                <td class="text-muted">{{i+1}}</td>
+                <td class="text-muted">{{e.examName}}</td>
+                <td class="text-muted">{{e.grade}}</td>
+                <td class="text-muted">{{e.highGrade}}</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
